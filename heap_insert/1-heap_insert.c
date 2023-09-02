@@ -12,29 +12,29 @@
  **/
 void *insert_level_order(heap_t *root, int idx, int size, int value)
 {
-	heap_t *left, *right;
+heap_t *left, *right;
 
-	if (root == NULL)
+if (root == NULL)
+{
+	return (NULL);
+}
+if (idx == size / 2)
+{
+	if (root->left == NULL)
 	{
-		return (NULL);
+		root->left = binary_tree_node(root, value);
+		return (root->left);
 	}
-	if (idx == size / 2)
-	{
-		if (root->left == NULL)
-		{
-			root->left = binary_tree_node(root, value);
-			return (root->left);
-		}
-		root->right = binary_tree_node(root, value);
-		return (root->right);
-	}
-	left = insert_level_order(root->left, (2 * idx), size, value);
-	right = insert_level_order(root->right, (2 * idx + 1), size, value);
-	if (left)
-	{
-		return (left);
-	}
-	return (right);
+	root->right = binary_tree_node(root, value);
+	return (root->right);
+}
+left = insert_level_order(root->left, (2 * idx), size, value);
+right = insert_level_order(root->right, (2 * idx + 1), size, value);
+if (left)
+{
+	return (left);
+}
+return (right);
 }
 
 /**
@@ -44,17 +44,15 @@ void *insert_level_order(heap_t *root, int idx, int size, int value)
  */
 int heap_size(heap_t *root)
 {
-	int left, right;
+int left, right;
 
-	if (root == NULL)
-	{
-		return (0);
-	}
-	left = heap_size(root->left);
-	right = heap_size(root->right);
-
-	return (left + right + 1);
+if (root == NULL)
+{
+	return (0);
 }
+left = heap_size(root->left);
+right = heap_size(root->right);
+return (left + right + 1);
 
 /**
  * swap - function that swap
@@ -63,9 +61,10 @@ int heap_size(heap_t *root)
  */
 void swap(int *a, int *b)
 {
-	int tmp = *a;
-	*a = *b;
-	*b = tmp;
+int tmp = *a;
+
+*a = *b;
+*b = tmp;
 }
 /**
  * heap_insert - function that inserts a value into a Max Binary Heap
@@ -76,27 +75,27 @@ void swap(int *a, int *b)
 
 heap_t *heap_insert(heap_t **root, int value)
 {
-    heap_t *newn;
-	int size;
+heap_t *newn;
+int size;
 
-    if (*root == NULL)
-    {
-    	newn = binary_tree_node(NULL, value);
-        *root = newn;
-        return (newn);
-    }
-	size = heap_size(*root) + 1;
-	newn = insert_level_order(*root, 1, size, value);
-	for(; newn->parent; newn = newn->parent)
-	{
-		if (newn->parent->n < newn->n)
-		{
-			swap(&newn->parent->n, &newn->n);
-		}
-		else
-		{
-			break;
-		}
-	}
+if (*root == NULL)
+{
+  	newn = binary_tree_node(NULL, value);
+    *root = newn;
     return (newn);
+}
+size = heap_size(*root) + 1;
+newn = insert_level_order(*root, 1, size, value);
+for(; newn->parent; newn = newn->parent)
+{
+	if (newn->parent->n < newn->n)
+	{
+		swap(&newn->parent->n, &newn->n);
+	}
+	else
+	{
+		break;
+	}
+}
+return (newn);
 }
