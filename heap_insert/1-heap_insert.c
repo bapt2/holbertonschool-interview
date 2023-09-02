@@ -80,22 +80,22 @@ int size;
 
 if (*root == NULL)
 {
-  	newn = binary_tree_node(NULL, value);
-    *root = newn;
-    return (newn);
+newn = binary_tree_node(NULL, value);
+*root = newn;
+return (newn);
 }
 size = heap_size(*root) + 1;
 newn = insert_level_order(*root, 1, size, value);
-for(; newn->parent; newn = newn->parent)
+for (; newn->parent; newn = newn->parent)
 {
-	if (newn->parent->n < newn->n)
-	{
-		swap(&newn->parent->n, &newn->n);
-	}
-	else
-	{
-		break;
-	}
+if (newn->parent->n < newn->n)
+{
+swap(&newn->parent->n, &newn->n);
+}
+else
+{
+break;
+}
 }
 return (newn);
 }
