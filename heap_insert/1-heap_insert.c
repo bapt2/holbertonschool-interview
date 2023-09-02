@@ -53,7 +53,7 @@ if (root == NULL)
 left = heap_size(root->left);
 right = heap_size(root->right);
 return (left + right + 1);
-
+}
 /**
  * swap - function that swap
  * @a: first element to swap
