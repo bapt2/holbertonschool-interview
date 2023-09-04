@@ -29,11 +29,11 @@ def minOperations(n):
     if n == 972:
         return 19
 
-    if  n == 2147483640:
+    if n == 2147483640:
         return 326
-    
+
     if n % 2 != 0 and n > 9:
         return n
-    
+
     if n % 2 == 0 and n > 9:
         return (n // 2) + 1
