@@ -4,6 +4,9 @@ int is_palindrome(listint_t **head)
 {
     listint_t *copy = NULL;
     listint_t *current = *head;
+    listint_t *prev = NULL;
+    listint_t *next = NULL;
+
     if (head == NULL)
     {
         return (1);
@@ -14,8 +17,6 @@ int is_palindrome(listint_t **head)
         add_nodeint_end(&copy, current->n);
         current = current->next;
     }
-    listint_t *prev = NULL;
-    listint_t *next = NULL;
     current = copy;
     while (current)
     {
