@@ -10,7 +10,15 @@
 
  int is_palindrome(unsigned long n)
  {
-    if (n % 2 == 0)
-        return 0;
-    return 1;
+    size_t reverse = 0, num;
+    num = n;
+    while(num != 0)
+    {
+        reverse = reverse * 10;
+        reverse = reverse + num % 10;
+        num = num / 10;
+    }
+    if (n == reverse)
+        return 1;
+    return 0;
  }
